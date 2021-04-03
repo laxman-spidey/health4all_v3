@@ -165,3 +165,6 @@ CREATE TABLE `helpline_session_plan` (
   `soft_deleted_by_date_time` TIMESTAMP , 
   PRIMARY KEY (`helpline_session_plan_id`)
 ) ENGINE = InnoDB;
+
+INSERT INTO `user_function`(`user_function`, `user_function_display`, `description`) 
+VALUES ('helpline_session_plan','helpline Session Plan','Planning helpline sessions');

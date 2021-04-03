@@ -393,6 +393,9 @@
 					<li><a href="<?php echo base_url()."helpline/update_call";?>"><i class="fa fa-phone"></i>HelpLine Update</a></li>
 					<li><a href="<?php echo base_url()."helpline/update_voicemail_calls";?>"><i class="fa fa-phone"></i>HelpLine Voicemail Update</a></li>
 			<?php }
+			if($f->user_function=="helpline_session_plan"){ ?>
+					<li><a href="<?php echo base_url()."helpline/session_plan";?>"><i class="fa fa-phone"></i>HelpLine Session Plan</a></li>
+			<?php }
 			if($f->user_function=="documentation"){ ?>
 					<li><a href="<?php echo base_url()."documentation/documents";?>"><i class="fa fa-phone"></i>User Documents</a></li>
 			<?php } } ?>
