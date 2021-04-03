@@ -122,3 +122,46 @@ CREATE TABLE `appointment_status` ( `id` INT NOT NULL AUTO_INCREMENT , `hospital
 ALTER TABLE `patient_visit` ADD `appointment_status_id` INT NULL AFTER `temp_visit_id`, ADD `appointment_status_update_by` INT NULL AFTER `appointment_status_id`, ADD `appointment_status_update_time` DATETIME NULL AFTER `appointment_status_update_by`;
 
 INSERT INTO `user_function` (`user_function_id`, `user_function`, `user_function_display`, `description`) VALUES (NULL, 'appointment_status', 'appointment_status', 'Status of the appointments');
+
+DROP TABLE IF EXISTS `helpline_session`; 
+CREATE TABLE `helpline_session` (
+ `helpline_session_id` int(11) NOT NULL,
+ `helpline_id` int(11) NOT NULL,
+ `session_name` varchar(100) NOT NULL,
+ `monthday` tinyint(4) ,
+ `weekday` tinyint(4)  COMMENT 'Values 1 to 7 (1 is monday)',
+ `from_time` int(11) NOT NULL,
+ `to_time` int(11) NOT NULL,
+ `session_status` tinyint(4) NOT NULL COMMENT '1 for active and 0 for discontinued',
+ PRIMARY KEY (`helpline_session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `helpline_session_role`; 
+CREATE TABLE `helpline_session_role` ( 
+  `helpline_session_role_id` INT(11) NOT NULL , 
+  `helpline_session_role` VARCHAR(50) NOT NULL COMMENT 'Values (Call Receiving, Support)' , 
+  PRIMARY KEY (`helpline_session_role_id`)
+) ENGINE = InnoDB; 
+
+DROP TABLE IF EXISTS `helpline_receiver_language`;
+CREATE TABLE `helpline_receiver_language` (
+  `helpline_receiver_language_id` INT(11) NOT NULL , 
+  `receiver_id` INT(11) NOT NULL , 
+  `language_id` INT(11) NOT NULL , 
+  `proficiency` TINYINT(1) NOT NULL COMMENT '3 levels, 3 highest, 2 average, 1 basic' , 
+  PRIMARY KEY (`helpline_receiver_language_id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `helpline_session_plan`;
+CREATE TABLE `helpline_session_plan` ( 
+  `helpline_session_plan_id` INT(11) NOT NULL , 
+  `receiver_id` INT(11) NOT NULL , 
+  `helpline_session_id` INT(11) NOT NULL , 
+  `helpline_session_role_id` INT(11) NOT NULL , 
+  `created_by_staff_id` INT(11) NOT NULL , 
+  `created_date_time` TIMESTAMP(1) NOT NULL , 
+  `soft_deleted` TINYINT(1) , 
+  `soft_deleted_by_staff_id` INT(11) , 
+  `soft_deleted_by_date_time` TIMESTAMP , 
+  PRIMARY KEY (`helpline_session_plan_id`)
+) ENGINE = InnoDB;
